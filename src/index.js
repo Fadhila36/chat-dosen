@@ -8,6 +8,7 @@ import { Button, Typography } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
+
 const notistackRef = React.createRef();
 const onClickDismiss = key => () => {
     notistackRef.current.closeSnackbar(key);
@@ -25,10 +26,10 @@ ReactDOM.render(
         )}
     >
 
-        <AppBar position="static" style={{ padding: 0 }}>
+        <AppBar position="static" style={{ padding: 0 }} >
             <Toolbar>
-                <Typography variant="h4">
-                    Web Chat Dosen Beta 1 Himatif UBP KARAWANG
+                <Typography variant="h5">
+                    Web Chat Dosen By Himatif Universitas Buana Perjuangan Karawang
                     </Typography>
             </Toolbar>
         </AppBar>
