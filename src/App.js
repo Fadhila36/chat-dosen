@@ -148,7 +148,7 @@ const TimeReminder = () => {
             setPenutupMuslim(prevState => ({
                 ...prevState,
                 status: !penutupMuslim.status,
-                value: (penutupMuslim.status) ? '' : 'Wassalamualaikum'
+                value: (penutupMuslim.status) ? 'Terima Kasih' : 'Wassalamualaikum'
             }));
         } else if (event.target.name === "jenis kelamin") {
             let context = event.target.value;
@@ -189,14 +189,14 @@ const TimeReminder = () => {
         let perkenalan = `${adalahMuslim.value} ${adalahPria.value}. Mohon maaf mengganggu waktunya, Nama saya ${nama}, dari kelas ${kelas}, dengan nim ${nim}, dari Prodi${prodi}.`.replace(/ /g, '%20');
         let urusan = `${tujuan} ${pertanyaan}`.replace(/ /g, '%20');
         let penutup = `${ucapanPenutup}`.replace(/ /g, '%20');
-        let salam = `${penutupMuslim}`.replace(/ /g, '%20');
+        let salam = `${penutupMuslim.value}`.replace(/ /g, '%20');
 
         setMessage(`${perkenalan}%0D%0A%0A${urusan}%0D%0A%0A${penutup}%0D%0A%0A${salam}`);
 
         return () => {
             clearInterval(secTimer);
         };
-    }, [nomorDosen, nama, nim, prodi, kelas, tujuan, pertanyaan, ucapanPenutup, penutupMuslim, adalahPria, adalahMuslim, message]);
+    }, [nomorDosen, nama, nim, prodi, kelas, tujuan, pertanyaan, ucapanPenutup, adalahPria, adalahMuslim, penutupMuslim, message]);
 
     return (
         <React.Fragment>
