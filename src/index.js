@@ -26,7 +26,7 @@ ReactDOM.render(
         )}
     >
 
-        <AppBar position="static" style={{ padding: 0 }} >
+        <AppBar position="fixed" style={{ padding: 0 }} >
             <Toolbar>
                 <Typography variant="h5">
                     Web Chat Dosen By Himatif Universitas Buana Perjuangan Karawang

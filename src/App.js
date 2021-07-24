@@ -190,7 +190,7 @@ const TimeReminder = () => {
             setCurrentDate(new Date().toLocaleTimeString())
         }, 1000);
 
-        let perkenalan = `${adalahMuslim.value} ${adalahPria.value}. Mohon maaf mengganggu waktunya, Nama saya ${nama}, dari kelas ${kelas}, dengan nim ${nim}, dari Prodi${prodi}.`.replace(/ /g, '%20');
+        let perkenalan = `${adalahMuslim.value} ${adalahPria.value}. Mohon maaf mengganggu waktunya, Nama saya ${nama}, dari kelas ${kelas}, dengan nim ${nim}, dari Prodi ${prodi}.`.replace(/ /g, '%20');
         let urusan = `${tujuan} ${pertanyaan}`.replace(/ /g, '%20');
         let penutup = `${ucapanPenutup}`.replace(/ /g, '%20');
         let salam = `${penutupMuslim.value}`.replace(/ /g, '%20');
