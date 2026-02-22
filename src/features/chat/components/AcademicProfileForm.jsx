@@ -4,13 +4,13 @@ import { Input, Label } from '@/components/ui';
 
 export function AcademicProfileForm({ formData, handleChange }) {
   return (
-    <div className="lg:col-span-5 p-8 lg:p-10 space-y-8 bg-slate-50/30">
+    <div className="lg:col-span-5 p-8 lg:p-10 space-y-8 bg-slate-50/30 dark:bg-slate-900/30 transition-colors">
       <div>
-        <h3 className="text-xl font-bold text-slate-900 flex items-center gap-3 mb-2">
-            <div className="p-2 bg-brand-100 rounded-lg text-brand-600"><User className="w-5 h-5" /></div>
+        <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-3 mb-2">
+            <div className="p-2 bg-brand-100 dark:bg-brand-900/40 rounded-lg text-brand-600 dark:text-brand-400"><User className="w-5 h-5" /></div>
             Profil Akademik
         </h3>
-        <p className="text-sm text-slate-500">Sistem butuh identitas ini untuk bagian perkenalan.</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Sistem butuh identitas ini untuk bagian perkenalan.</p>
       </div>
 
       <div className="space-y-5">

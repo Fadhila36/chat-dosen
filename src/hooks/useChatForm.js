@@ -15,6 +15,42 @@ export function useChatForm() {
         penutupMuslim: true, 
     });
 
+    // Preset Management
+    const [savedPresets, setSavedPresets] = useState(() => {
+        const stored = localStorage.getItem('cd_savedPresets');
+        return stored ? JSON.parse(stored) : [];
+    });
+
+    const savePreset = (presetName) => {
+        if (!formData.tujuan.trim()) return false;
+        
+        const newPreset = {
+            id: Date.now().toString(),
+            name: presetName || formData.tujuan.substring(0, 20) + '...',
+            tujuan: formData.tujuan,
+            pertanyaan: formData.pertanyaan
+        };
+        
+        const updated = [...savedPresets, newPreset];
+        setSavedPresets(updated);
+        localStorage.setItem('cd_savedPresets', JSON.stringify(updated));
+        return true;
+    };
+
+    const loadPreset = (preset) => {
+        setFormData(prev => ({
+            ...prev,
+            tujuan: preset.tujuan,
+            pertanyaan: preset.pertanyaan || ''
+        }));
+    };
+
+    const deletePreset = (id) => {
+        const updated = savedPresets.filter(p => p.id !== id);
+        setSavedPresets(updated);
+        localStorage.setItem('cd_savedPresets', JSON.stringify(updated));
+    };
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         const newValue = type === 'checkbox' ? checked : value;
@@ -33,6 +69,25 @@ export function useChatForm() {
 
     const handleRadioChange = (name, value) => {
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const resetForm = () => {
+        setFormData({
+            nomorDosen: '',
+            adalahPria: true, 
+            adalahMuslim: true, 
+            nama: '',
+            kelas: '',
+            nim: '',
+            prodi: '',
+            tujuan: '',
+            pertanyaan: '',
+            ucapanPenutup: '',
+            penutupMuslim: true, 
+        });
+
+        const persitableFields = ['nama', 'kelas', 'nim', 'prodi', 'nomorDosen'];
+        persitableFields.forEach(field => localStorage.removeItem(`cd_${field}`));
     };
 
     const fixPhone = (phone) => {
@@ -114,6 +169,11 @@ export function useChatForm() {
         handleChange,
         handleRadioChange,
         generatedMessage,
-        handleSendMessage
+        handleSendMessage,
+        savedPresets,
+        savePreset,
+        loadPreset,
+        deletePreset,
+        resetForm
     };
 }

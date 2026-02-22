@@ -12,13 +12,42 @@ import { MessageConstructionForm } from './components/MessageConstructionForm';
 
 export function ChatForm() {
   const { currentDate, rightTime } = useTime();
-  const { formData, handleChange, handleRadioChange, handleSendMessage, generatedMessage } = useChatForm();
+  const { 
+      formData, 
+      handleChange, 
+      handleRadioChange, 
+      handleSendMessage, 
+      generatedMessage,
+      savedPresets,
+      savePreset,
+      loadPreset,
+      deletePreset,
+      resetForm
+  } = useChatForm();
   
   const [showPreview, setShowPreview] = useState(false);
   const [hasCopied, setHasCopied] = useState(false);
 
   // Validation Check - Requires Nama, Nomor Dosen, and Tujuan
   const isValidForm = formData.nama.trim() !== '' && formData.nomorDosen.trim() !== '' && formData.tujuan.trim() !== '';
+
+  const onLaunchWhatsApp = (e) => {
+    if (rightTime.blockAction) {
+       e.preventDefault();
+       toast.error(rightTime.value, {
+           icon: '🚫',
+       });
+       return;
+    }
+    handleSendMessage(e);
+  };
+
+  const handleReset = () => {
+    if (window.confirm('Apakah Anda yakin ingin mereset formulir? Semua data yang belum terkirim akan hilang.')) {
+        resetForm();
+        toast.success("Formulir berhasil direset.");
+    }
+  };
 
   const handleCopy = async () => {
     try {
@@ -39,13 +68,13 @@ export function ChatForm() {
       {/* Header & Status Time */}
       <div className="flex flex-col md:flex-row gap-6 items-stretch">
         {/* Intro Card */}
-        <div className="w-full md:w-2/3 bg-white/70 backdrop-blur-md p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 relative overflow-hidden group">
-           <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-brand-100 to-brand-50 rounded-full blur-3xl -z-10 group-hover:scale-110 transition-transform duration-700"></div>
-           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 mb-6 shadow-inner ring-1 ring-brand-100">
+        <div className="w-full md:w-2/3 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-black/40 border border-white/60 dark:border-white/10 relative overflow-hidden group">
+           <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-brand-100 to-brand-50 dark:from-brand-900/20 dark:to-slate-800 rounded-full blur-3xl -z-10 group-hover:scale-110 transition-transform duration-700"></div>
+           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 dark:bg-slate-800 text-brand-600 dark:text-brand-400 mb-6 shadow-inner ring-1 ring-brand-100 dark:ring-white/10">
               <Sparkles className="w-7 h-7" />
            </div>
-           <h2 className="text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">Asisten Diktat Presisi.</h2>
-           <p className="text-slate-600 leading-relaxed text-lg max-w-xl">
+           <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-3 tracking-tight">Asisten Diktat Presisi.</h2>
+           <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg max-w-xl">
              Formulasikan pesan WhatsApp ke Dosen Anda secara otomatis, sopan, dan terstruktur tanpa perlu menebak-nebak kata pengantar.
            </p>
         </div>
@@ -92,8 +121,8 @@ export function ChatForm() {
       </div>
 
       {/* Main Form Area */}
-      <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-black/50 border border-white/60 dark:border-white/10 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-100 dark:divide-slate-800">
               
               {/* LEFT COLUMN: IDENTITAS */}
               <AcademicProfileForm formData={formData} handleChange={handleChange} />
@@ -105,7 +134,14 @@ export function ChatForm() {
                  <DestinationForm formData={formData} handleChange={handleChange} handleRadioChange={handleRadioChange} />
 
                  {/* Isi Pesan Section */}
-                 <MessageConstructionForm formData={formData} handleChange={handleChange} />
+                 <MessageConstructionForm 
+                    formData={formData} 
+                    handleChange={handleChange}
+                    savedPresets={savedPresets}
+                    savePreset={savePreset}
+                    loadPreset={loadPreset}
+                    deletePreset={deletePreset}
+                 />
 
                  {/* ACTION BUTTONS & PREVIEW */}
                  <div className="pt-6 mt-4 flex flex-col space-y-4 relative">
@@ -120,7 +156,7 @@ export function ChatForm() {
                                 transition={{ type: "spring", stiffness: 350, damping: 25 }}
                                 className="overflow-hidden"
                             >
-                                <div className="p-6 bg-gradient-to-br from-slate-900 to-slate-800 text-slate-50 rounded-3xl relative shadow-2xl shadow-brand-900/20 ring-1 ring-white/10 group/preview mt-4">
+                                <div className="p-6 bg-gradient-to-br from-slate-900 to-slate-800 dark:from-slate-800 dark:to-slate-950 text-slate-50 rounded-3xl relative shadow-2xl shadow-brand-900/20 dark:shadow-black/50 ring-1 ring-white/10 group/preview mt-4">
                                     <div className="absolute top-0 inset-x-0 mx-auto w-1/3 h-1 bg-brand-500 rounded-b-full shadow-[0_0_15px_rgba(14,165,233,1)]"></div>
                                     <div className="flex justify-between items-center mb-4">
                                         <h4 className="text-xs font-bold text-brand-400 uppercase tracking-widest flex items-center gap-2"><MessageCircle className="w-4 h-4" /> Pratinjau Pesan</h4>
@@ -146,6 +182,15 @@ export function ChatForm() {
                          <Button 
                             type="button" 
                             variant="ghost" 
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/30 w-full sm:w-auto font-medium"
+                            onClick={handleReset}
+                         >
+                            Reset Formulir
+                         </Button>
+
+                         <Button 
+                            type="button" 
+                            variant="ghost" 
                             className="w-full sm:w-auto text-slate-500 hover:text-slate-900 font-medium"
                             onClick={() => setShowPreview(!showPreview)}
                          >
@@ -155,11 +200,17 @@ export function ChatForm() {
                          <Button 
                             type="button" 
                             size="lg"
-                             className={`w-full sm:w-auto text-white font-bold tracking-wide rounded-2xl gap-2 px-8 transition-all relative overflow-hidden group ${isValidForm ? 'bg-brand-600 hover:bg-brand-700 shadow-xl shadow-brand-500/30' : 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'}`}
-                             onClick={isValidForm ? handleSendMessage : undefined}
+                             className={`w-full sm:w-auto text-white font-bold tracking-wide rounded-2xl gap-2 px-8 transition-all relative overflow-hidden group ${
+                                !isValidForm 
+                                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none' 
+                                    : rightTime.blockAction 
+                                        ? 'bg-rose-500 hover:bg-rose-600 shadow-xl shadow-rose-500/30' 
+                                        : 'bg-brand-600 hover:bg-brand-700 shadow-xl shadow-brand-500/30'
+                             }`}
+                             onClick={isValidForm ? onLaunchWhatsApp : undefined}
                              disabled={!isValidForm}
                           >
-                             {isValidForm && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none"></div>}
+                             {isValidForm && !rightTime.blockAction && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none"></div>}
                              <Send className="w-5 h-5" />
                              Launch WhatsApp
                           </Button>

@@ -7,8 +7,11 @@ Aplikasi generator pesan WhatsApp dengan format bahasa yang sopan dan sesuai **E
 ## 🚀 Fitur Unggulan
 
 - **Sistem Cerdas Peringatan Waktu**: Membaca jarum jam secara *real-time* (+ validasi akhir pekan) guna mencegah Anda mengirim pesan di luar jam kerja (mis. larut malam atau hari libur).
-- **Auto-Fill Data Mengendap (*Persistence*)**: Identitas Anda (Nama, NIM, Prodi) otomatis terkunci secara lokal berkat *Local Storage*—tidak perlu mengetik dua kali.
+- **Pendeteksi Kata Non-Formal (Slang)**: Menganalisis kalimat Anda *on-the-fly* dan memberi peringatan etika jika terdeteksi penggunaan singkatan atau kata yang kurang pantas untuk dosen.
+- **Auto-Fill Data Mengendap (*Persistence*) & Presets**: Identitas Anda (Nama, NIM, Prodi) otomatis terkunci secara lokal berkat *Local Storage*—tidak perlu mengetik dua kali. Anda juga bisa menyimpan *Preset Tujuan* yang sering digunakan.
+- **Formulir Lanjutan & Ucapan Penutup**: Terlepas dari sapaan baku otomatis, Anda dibebaskan menyematkan inti pertanyaan hingga ucapan penutup yang kustom.
 - **Copy-to-Clipboard & Toast Notifikasi**: Batal ngetik manual di WA? Cukup tekan "Salin Teks", dan *Toast bar* elegan (*Sonner*) akan memberi umpan balik hijau (*Copied!*) secapat kilat.
+- **Reset Cerdas**: Bersihkan seluruh _cache_ formulir dan identitas dengan satu tombol **Reset Formulir** yang aman (dilengkapi sistem konfirmasi).
 - **Fluid UI & Physics Animations**: Semua tombol, interaksi mikroskopis, membal (*spring*), memancar, dan melayang persis seperti aplikasi elit (Vercel, Apple, Stripe) berkat ekosistem Tailwind v4 dan Framer Motion.
 
 ## 🛠️ Tech Stack Ekstrim (2026)
