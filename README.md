@@ -44,6 +44,6 @@ npm run build
 
 ## 🤝 Kontribusi & Dukungan
 
-Proyek *open-source* ini dicetuskan oleh HIMATIF dan dikembangkan (Modernized) secara masif oleh [Muhammad Fadhila Abiyyu Faris](https://github.com/fadhila36). Jangan ragu untuk memberikan *Star*, melaporkan serangga (Bugs), atau melakukan *Pull Request*.
+Proyek *open-source* ini dicetuskan oleh PUSDATIN UNIVERSITAS BUANA PERJUANGAN KARAWANG dan dikembangkan (Modernized) secara masif oleh [Muhammad Fadhila Abiyyu Faris](https://github.com/fadhila36). Jangan ragu untuk memberikan *Star*, melaporkan serangga (Bugs), atau melakukan *Pull Request*.
 
 Dibuat dengan ❤️ dari Karawang.
